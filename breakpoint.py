@@ -1,6 +1,6 @@
 from settings import remainListFile
 import json
-from download import downloads
+from settings import downloads
 def go_on():
     try:
         f = open(remainListFile,'r',encoding='utf-8')
@@ -26,3 +26,5 @@ def go_on():
     except Exception as e:
         print(e)
         return
+if __name__ == '__main__':
+    go_on()

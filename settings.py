@@ -1,4 +1,8 @@
 import os
+import download.downloads
+import download.asyncDownloads
+
+downloads = download.downloads
 headers = {'Host': 'www.icourse163.org',
     'edu-app-type': 'android',
     'edu-app-version': '3.19.10',
