@@ -2,7 +2,8 @@ import requests
 import json
 import settings
 from couresparser import parseCourse
-from download import downloads
+from download import downloads,downliadList
+import breakpoint
 def getCourseInfoByNet(tid:str):
     data = {
         'termId':tid,
@@ -15,10 +16,9 @@ def getCourseInfoByNet(tid:str):
         response.encoding = response.apparent_encoding
         responseJson = json.loads(response.text,encoding='utf-8')
         parseCourse(responseJson)
-        downloads()
+        downloads(downliadList)
     except Exception as e:
         print(e)
-# def getCourseInfoByJson(jsonPath:str):
-
 if __name__ == '__main__':
+    breakpoint.go_on()
     getCourseInfoByNet('1206616230')

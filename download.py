@@ -1,9 +1,10 @@
-import os
+import os,json
 import requests
 from lib import createDir,getFileSize
 from contextlib import closing
-
+from settings import remainListFile
 downliadList = []
+remainList = []
 
 def _myPrintProcess(content_size,data_count,name):
     now_jd = (data_count / content_size) * 100
@@ -11,7 +12,6 @@ def _myPrintProcess(content_size,data_count,name):
 
 def _download(path,url):
     try:
-        print('开始下载', os.path.basename(path))
         with closing(requests.get(url, stream=True)) as response:
             chunk_size = 1024*100  # 单次请求最大值
             content_size = int(response.headers['content-length'])  # 内容体总大小
@@ -22,18 +22,24 @@ def _download(path,url):
                     data_count = data_count + len(data)
                     _myPrintProcess(content_size,data_count,os.path.basename(path))
                 print("\r 文件下载完成 - %s" % (os.path.basename(path)))
+            remainList.remove([path,url])
+            with open(remainListFile,'w',encoding='utf-8')as f:
+                json.dump(remainList,f,ensure_ascii=False,indent=4)
     except:
         print('\r文件下载失败---------------', os.path.basename(path))
 
-def downloads():
-    for path,url in downliadList:
+def downloads(List:list):
+    global remainList
+    remainList = List
+    for i in List:
+        path, url = i[0],i[1]
         dir = os.path.dirname(path)
         createDir(dir)
         _download(path,url)
 
 def downloadNew(path,url):
     try:
-        print('开始下载', os.path.basename(path))
+        # print('开始下载', os.path.basename(path))
         with closing(requests.get(url, stream=True)) as response:
             chunk_size = 1024*1024  # 单次请求最大值
             content_size = int(response.headers['content-length'])  # 内容体总大小
@@ -42,7 +48,7 @@ def downloadNew(path,url):
                 for data in response.iter_content(chunk_size=chunk_size):
                     file.write(data)
                     data_count = data_count + len(data)
-                    myPrintProcess(content_size,data_count,os.path.basename(path))
+                    _myPrintProcess(content_size,data_count,os.path.basename(path))
                 print("\r 文件下载完成 - %s" % (os.path.basename(path)))
     except Exception as e:
         print(e)

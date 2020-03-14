@@ -12,7 +12,7 @@ class Vedio():
         #     self.videoUrl = kwargs['resourceInfo']['videoHDUrl']
         # elif 'videoUrl' in kwargs['resourceInfo']:
         #     self.videoUrl = kwargs['resourceInfo']['videoUrl']
-        downliadList.append((self.path, self.videoUrl))
+        downliadList.append([self.path, self.videoUrl])
     def __getitem__(self, item):
         return getattr(self,item)
 
@@ -21,7 +21,7 @@ class Doc():
         self.name = kwargs['name']
         self.path = os.path.join(path, self.name)+'.pdf'
         self.textUrl = kwargs['resourceInfo']['textUrl']
-        downliadList.append((self.path, self.textUrl))
+        downliadList.append([self.path, self.textUrl])
     def __getitem__(self, item):
         return getattr(self,item)
 

@@ -13,3 +13,4 @@ url='https://www.icourse163.org/mob/course/courseLearn/v1'
 resourceRoot=os.path.join(os.path.dirname(os.path.abspath(__file__)),'CourseWare')
 if not os.path.exists(resourceRoot):
     os.makedirs(resourceRoot)
+remainListFile = os.path.join(resourceRoot,'remainList.json')
