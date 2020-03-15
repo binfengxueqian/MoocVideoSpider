@@ -17,7 +17,7 @@ def getCourseInfoByNet(tid:str):
         response.encoding = response.apparent_encoding
         responseJson = json.loads(response.text,encoding='utf-8')
         parseCourse(responseJson)
-        download(downliadList)
+        downloads(downliadList)
     except Exception as e:
         print(e)
 if __name__ == '__main__':
