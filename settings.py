@@ -1,8 +1,5 @@
 import os
-import download.downloads
-import download.asyncDownloads
 
-downloads = download.downloads
 headers = {'Host': 'www.icourse163.org',
     'edu-app-type': 'android',
     'edu-app-version': '3.19.10',
@@ -17,4 +14,6 @@ url='https://www.icourse163.org/mob/course/courseLearn/v1'
 resourceRoot=os.path.join(os.path.dirname(os.path.abspath(__file__)),'CourseWare')
 if not os.path.exists(resourceRoot):
     os.makedirs(resourceRoot)
+
 remainListFile = os.path.join(resourceRoot,'remainList.json')
+

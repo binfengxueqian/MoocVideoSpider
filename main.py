@@ -4,8 +4,10 @@ import settings
 from couresparser import parseCourse
 from download import downliadList
 import breakpoint
-from settings import downloads
+from download import slecetDownload
+from models import selectVideoQuality
 def getCourseInfoByNet(tid:str):
+    from download import downloads
     data = {
         'termId':tid,
         'tid':tid,
@@ -21,5 +23,7 @@ def getCourseInfoByNet(tid:str):
     except Exception as e:
         print(e)
 if __name__ == '__main__':
+    slecetDownload()
+    selectVideoQuality()
     breakpoint.go_on()
     getCourseInfoByNet('1206616230')

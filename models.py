@@ -1,17 +1,19 @@
 import os
 from download import downliadList
-
+SHDVideo = True
 class Vedio():
     def __init__(self,path,**kwargs):
         self.name = kwargs['name']
         self.path = os.path.join(path, self.name)+'.mp4'
-        self.videoUrl = kwargs['resourceInfo']['sdMp4Url']
-        # if 'videoSHDUrl' in kwargs['resourceInfo']:
-        #     self.videoUrl = kwargs['resourceInfo']['videoSHDUrl']
-        # elif 'videoHDUrl' in kwargs['resourceInfo']:
-        #     self.videoUrl = kwargs['resourceInfo']['videoHDUrl']
-        # elif 'videoUrl' in kwargs['resourceInfo']:
-        #     self.videoUrl = kwargs['resourceInfo']['videoUrl']
+        if SHDVideo:
+            if not kwargs['resourceInfo']['videoSHDUrl']=='':
+                self.videoUrl = kwargs['resourceInfo']['videoSHDUrl']
+            elif not kwargs['resourceInfo']['videoHDUrl']=='':
+                self.videoUrl = kwargs['resourceInfo']['videoHDUrl']
+            elif not kwargs['resourceInfo']['videoUrl']=='':
+                self.videoUrl = kwargs['resourceInfo']['videoUrl']
+        else:
+            self.videoUrl = kwargs['resourceInfo']['sdMp4Url']
         downliadList.append([self.path, self.videoUrl])
     def __getitem__(self, item):
         return getattr(self,item)
@@ -48,3 +50,14 @@ class Chapter():
         for i in kwargs['lessons']:
             lesson = Lesson(self.path,**i)
             self.Lesson.append(lesson)
+
+def selectVideoQuality():
+    global SHDVideo
+    a = input('是否下载高清画质，这将花费更长的时间？(y,n)')
+    if a == 'n':
+        SHDVideo = False
+    elif a == 'y':
+        SHDVideo = True
+    else:
+        exit()
+    print(SHDVideo)

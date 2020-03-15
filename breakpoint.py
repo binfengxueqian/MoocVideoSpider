@@ -1,7 +1,7 @@
 from settings import remainListFile
 import json
-from settings import downloads
 def go_on():
+    from download import downloads
     try:
         f = open(remainListFile,'r',encoding='utf-8')
         loadlist = json.load(f)
