@@ -1,5 +1,5 @@
 import os
-from download import downliadList
+from download import downloadList
 SHDVideo = True
 class Vedio():
     def __init__(self,path,**kwargs):
@@ -14,7 +14,7 @@ class Vedio():
                 self.videoUrl = kwargs['resourceInfo']['videoUrl']
         else:
             self.videoUrl = kwargs['resourceInfo']['sdMp4Url']
-        downliadList.append([self.path, self.videoUrl])
+        downloadList.append([self.path, self.videoUrl])
     def __getitem__(self, item):
         return getattr(self,item)
 
@@ -23,7 +23,7 @@ class Doc():
         self.name = kwargs['name']
         self.path = os.path.join(path, self.name)+'.pdf'
         self.textUrl = kwargs['resourceInfo']['textUrl']
-        downliadList.append([self.path, self.textUrl])
+        downloadList.append([self.path, self.textUrl])
     def __getitem__(self, item):
         return getattr(self,item)
 

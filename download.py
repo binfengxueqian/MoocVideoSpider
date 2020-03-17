@@ -5,7 +5,7 @@ from contextlib import closing
 from settings import remainListFile
 import asyncio
 import aiohttp
-downliadList = []
+downloadList = []
 remainList = []
 
 def _myPrintProcess(content_size,data_count,name):
@@ -58,7 +58,7 @@ def _download(path,url):
 
 def normalDownloads(List:list):
     global remainList
-    remainList = List
+    remainList = List.copy()
     for i in List:
         path, url = i[0],i[1]
         dir = os.path.dirname(path)
@@ -67,7 +67,7 @@ def normalDownloads(List:list):
 
 def asyncDownloads(List:list):
     global remainList
-    remainList = List
+    remainList = List.copy()
     tasks = []
     for i in List:
         path, url = i[0], i[1]

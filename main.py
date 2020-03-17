@@ -2,7 +2,7 @@ import requests
 import json
 import settings
 from couresparser import parseCourse
-from download import downliadList
+from download import downloadList
 import breakpoint
 from download import slecetDownload
 from models import selectVideoQuality
@@ -19,11 +19,11 @@ def getCourseInfoByNet(tid:str):
         response.encoding = response.apparent_encoding
         responseJson = json.loads(response.text,encoding='utf-8')
         parseCourse(responseJson)
-        downloads(downliadList)
+        downloads(downloadList)
     except Exception as e:
         print(e)
 if __name__ == '__main__':
-    slecetDownload()
-    selectVideoQuality()
+    # slecetDownload()
     breakpoint.go_on()
-    getCourseInfoByNet('1206616230')
+    selectVideoQuality()
+    getCourseInfoByNet('1450273447')
